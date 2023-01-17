@@ -19,12 +19,10 @@ public class Dragon : MonoBehaviour
         //Fly,
         //FlyFlameAttack,
         //Fly_Down,
-        
         //Hit,
-        
         Die
     }
-
+    
     public enum ActionType
     {
         Sleep,
@@ -44,22 +42,23 @@ public class Dragon : MonoBehaviour
         Chasing,
         Dead 
     }
+    // 초기 드래곤 actionType은 자는걸로 해둠
     public ActionType actionType = ActionType.Sleep;
 
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject attackCollsion;
     [SerializeField] private DigitalRuby.PyroParticles.FireBaseScript fire;
     [SerializeField] private Transform fireParent;
-    [SerializeField]
-    private GameObject[] itemPrefab;
+
+    [SerializeField] private GameObject[] itemPrefab;
     private CombatUI combatUI = null;
-    [SerializeField]
-    private Transform homPos;
+    [SerializeField] private Transform homPos;
     private bool isScream = false;
 
     private string[] animationTriggerNames = { "idle", "sleep", "walk", "run", "normalA", "clawA", "flameA", "scream", "die" };
 
     private float attackDelayTime = 0f;
+    // 공격 이후 딜레이 타임 변수 지정
     private float nextATKDelayTime = 5f;
     private Player player;
 
@@ -81,11 +80,13 @@ public class Dragon : MonoBehaviour
         {
             return;
         }
+        // 일정 조건일때 걸어오게 하고 플레이어를 쳐다보게 함
         if (dis > 12 && isScream)
         {
             Walk();
             transform.LookAt(player.transform);
         }
+        // 가까워지면 공격하는 코루틴 실행후 종료
         else
         {
             StartCoroutine("Attack");
@@ -110,6 +111,7 @@ public class Dragon : MonoBehaviour
 
             Animation[] randAniType = { Animation.Idle02, Animation.NormalAttack, Animation.ClawAttack};
             int rand = Random.Range(1, randAniType.Length);
+            // Random 변수 rand를 이용하여 다양한 에니메이션 활성화
             switch (randAniType[rand])
             {
                 case Animation.Idle02:
@@ -119,12 +121,12 @@ public class Dragon : MonoBehaviour
                 case Animation.NormalAttack:
                     StartCoroutine(NormalAttack());
                     GameManager.Instance.statusMgr.GSHP(-10);
-                    Debug.Log("깨물렸다.");
+                    Debug.Log("공격당했다!");
                     break;
                 case Animation.ClawAttack:
                     StartCoroutine(ClawAttack());
                     GameManager.Instance.statusMgr.GSHP(-20);
-                    Debug.Log("쌔게 깨물렸다.");
+                    Debug.Log("치명타를 입었다!");
                     break;
                 /*case Animation.FlameAttack:
                     StartCoroutine(FlameAttack());
@@ -143,12 +145,14 @@ public class Dragon : MonoBehaviour
     {
         if (player == null)
             yield return null;
+        // 플레이어가 죽었을 때
         if (GameManager.Instance.statusMgr.currentHp <= 0)
         {
             yield return new WaitForSeconds(2f);
             Sleep();
         }
     }
+
     public void Scream()
     {
         actionType = ActionType.Scream;
@@ -179,6 +183,7 @@ public class Dragon : MonoBehaviour
         actionType = ActionType.NorAttack;
         SetAnimation((int)Animation.NormalAttack);
 
+        // attackCollsion 짧은 시간동안 active 하여 공격 순간을 구현한다.
         yield return new WaitForSeconds(0.2f);
         attackCollsion.SetActive(true);
 

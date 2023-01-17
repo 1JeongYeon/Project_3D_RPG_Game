@@ -46,13 +46,7 @@ public class TargettingIMG : MonoBehaviour
         yield return new WaitForSeconds(1f);
         canvas.SetActive(false);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if(inventory.activeSelf == false)
