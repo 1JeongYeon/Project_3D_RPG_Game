@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a283ff574be45524ea4ca0fe6a9f9751, type: 3}
+  m_Name: Item_Shiled
+  m_EditorClassIdentifier: 
+  index: 4
+  itemName: "\uC2F8\uAD6C\uB824 \uBC29\uD328"
+  itemType: 0
+  itemImage: {fileID: 21300000, guid: 47c96e5414c2b4449920b448538df93a, type: 3}
+  itemPrefab: {fileID: 176636, guid: 73efd99907b7fbb4ab235797b78e7b69, type: 3}
+  itemPrice: 1000
+  itemDescript: "\uBC29\uC5B4\uB825 \uC99D\uAC00"
+  weaponType: Shield

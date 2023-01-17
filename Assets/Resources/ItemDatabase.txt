@@ -1,0 +1,6 @@
+Type	Name	Description	Count	isUsed
+Equipment	Dagger	단검	1	FALSE
+Equipment	Sword	대검	1	FALSE
+Used	MP_Potion	마나포션	1	FALSE
+Used	HP_Potion	체력포션	1	FALSE
+Equipment	Shield	방패	1	FALSE
