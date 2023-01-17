@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
         GaugeUpdate();
     }
 
+    // StatusManager 에서 수치 조정 하고 UI적인 부분은 UI Manager에서 관리한다.
     private void GaugeUpdate()
     {
         images_Gauge[HP].fillAmount = (float)GameManager.Instance.statusMgr.currentHp / GameManager.Instance.statusMgr.maxHp;
