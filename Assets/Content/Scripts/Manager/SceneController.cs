@@ -5,29 +5,28 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public static SceneController Instance;
-    GameObject testScene = null;
     void Start()
     {
         if (Instance == null)
             Instance = this;
 
-        if (testScene == null)
-        {
-            SceneManager.LoadScene("UI_Scene", LoadSceneMode.Additive);
-            if (SceneManager.GetSceneByName("UI_Scene").IsValid())
-            {
-                Debug.Log(this);
-            }
-            testScene = gameObject;
-        }
+        
+
+        AddUIScene();
     }
 
-    public void GoMainFeld()
+    public void AddUIScene()
+    {
+        SceneManager.LoadScene("UI_Scene", LoadSceneMode.Additive);
+    }
+
+    public void GoMainField()
     {
         GameObject.FindWithTag("Player")
             .GetComponent<Player>()
             .SetPosChange = new Vector3(66.6f, 25f, 41.53f);
-        StartCoroutine(SceneChange("InGame"));
+        GameManager.Instance.dataMgr.SaveGameData();
+        StartCoroutine(SceneChange("InGame", true));
     }
 
     public void GoDungeon1()
@@ -40,9 +39,14 @@ public class SceneController : MonoBehaviour
         StartCoroutine(SceneChange("Dungeon2"));
     }
 
-    IEnumerator SceneChange(string sceneName)
+    IEnumerator SceneChange(string sceneName, bool isAddUI = false)
     {
         yield return new WaitForSeconds(0.5f);
+        
         SceneManager.LoadScene(sceneName);
+        if (isAddUI)
+        {
+            AddUIScene();
+        }
     }
 }

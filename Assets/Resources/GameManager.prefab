@@ -209,3 +209,4 @@ MonoBehaviour:
   statusMgr: {fileID: 2613850731145733856}
   dataMgr: {fileID: 5062112326768994752}
   sceneController: {fileID: 4068038954343283187}
+  inventory: {fileID: 0}

@@ -55,7 +55,8 @@ public class Dragon : MonoBehaviour
     [SerializeField] private Transform homPos;
     private bool isScream = false;
 
-    private string[] animationTriggerNames = { "idle", "sleep", "walk", "run", "normalA", "clawA", "flameA", "scream", "die" };
+    private string[] animationTriggerNames 
+        = { "idle", "sleep", "walk", "run", "normalA", "clawA", "flameA", "scream", "die" };
 
     private float attackDelayTime = 0f;
     // 공격 이후 딜레이 타임 변수 지정
@@ -183,7 +184,7 @@ public class Dragon : MonoBehaviour
         actionType = ActionType.NorAttack;
         SetAnimation((int)Animation.NormalAttack);
 
-        // attackCollsion 짧은 시간동안 active 하여 공격 순간을 구현한다.
+        // attackCollsion을 짧은 시간동안 active 하여 공격 순간을 구현한다.
         yield return new WaitForSeconds(0.2f);
         attackCollsion.SetActive(true);
 

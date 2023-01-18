@@ -12,7 +12,8 @@ public class Portal : MonoBehaviour
         if (other.tag.Equals("Player"))
         {
             other.GetComponent<Player>().currentMapName = mapName;
-            SceneManager.LoadScene(mapName);
+            GameManager.Instance.dataMgr.SaveGameData();
+            SceneController.Instance.GoDungeon1();
         }
     }
 }

@@ -10,7 +10,7 @@ public class Escape : MonoBehaviour
         {
             if(SceneController.Instance != null)
             {
-                SceneController.Instance.GoMainFeld();
+                SceneController.Instance.GoMainField();
             }
         }
     }

@@ -13,7 +13,7 @@ public class InventoryUIManager : MonoBehaviour
 
     [SerializeField] private Toggle toggleInventoryUsed;
     [SerializeField] private Toggle toggleInventoryEquipment;
-    [SerializeField] private Toggle toggleInventoryETC;
+    [SerializeField] private Toggle toggleInventoryAll;
 
     [SerializeField] private GameObject inventoryScreen;
     [SerializeField] private GameObject background;
@@ -38,15 +38,38 @@ public class InventoryUIManager : MonoBehaviour
 
     private void Update()
     {
-        /*if (Inventory.inventoryActivated == true)
-        {
-            if (toggleInventoryEquipment.enabled || toggleInventoryETC.enabled || toggleInventoryUsed)
-            {
-                CheckItemType();
-            }
-        }*/
+        // ±¸Á¶ °í¹ÎÁß
+        return;
         SetUpToggleChoice();
+    }
 
+    private enum FilterOption
+    {
+        All, Equipment, Used
+    }
+    private FilterOption _currentFilterOption = FilterOption.All;
+
+    private void Awake()
+    {
+        // ...
+        InitToggleEvents();
+    }
+
+    private void InitToggleEvents()
+    {
+        toggleInventoryAll.onValueChanged.AddListener(flag => UpdateFilter(flag, FilterOption.All));
+        toggleInventoryEquipment.onValueChanged.AddListener(flag => UpdateFilter(flag, FilterOption.Equipment));
+        toggleInventoryUsed.onValueChanged.AddListener(flag => UpdateFilter(flag, FilterOption.Used));
+
+        // Local Method
+        void UpdateFilter(bool flag, FilterOption option)
+        {
+            if (flag)
+            {
+                _currentFilterOption = option;
+                // UpdateAllSlotFilters();
+            }
+        }
     }
 
     public Toggle setupToggleCurrentSeletion
@@ -120,47 +143,4 @@ public class InventoryUIManager : MonoBehaviour
      
         }
     }
-   /* private void CheckItemType()
-    {
-        Debug.Log("CheckItemType");
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if (slots[i].item != null)
-            {
-                toggleInventoryEquipment.onValueChanged.AddListener((bool p) =>
-                {
-                    if (p)
-                    {
-                        if (slots[i].item.itemType != Item.ItemType.Equipment)
-                        {
-                            slots[i].SetColor(0f);
-                        }
-                    }
-                });
-
-                toggleInventoryUsed.onValueChanged.AddListener((bool p) =>
-                {
-                    if (p)
-                    {
-                        if (slots[i].item.itemType != Item.ItemType.Used)
-                        {
-                            slots[i].SetColor(0f);
-                        }
-                    }
-                });
-
-                toggleInventoryETC.onValueChanged.AddListener((bool p) =>
-                {
-                    if (p)
-                    {
-                        if (slots[i].item.itemType != Item.ItemType.ETC)
-                        {
-                            slots[i].SetColor(0f);
-                        }
-                    }
-                });
-                //slots[i].SetColor(1f);
-            }
-        }
-    }*/
 }

@@ -34,9 +34,6 @@ public class GameManager : MonoBehaviour
     public GameState GameState { get; set; }
     public Map CurrentMap { get; set; }
 
-    public StatusManager statusMgr;
-    public DataManager dataMgr;
-    public SceneController sceneController;
 
     public int Coin { get; set; }
 
@@ -47,16 +44,21 @@ public class GameManager : MonoBehaviour
     }
 
     private Player player;
-    public Player Player { 
-        get 
+    public Player Player
+    {
+        get
         {
-            if(player == null)
+            if (player == null)
             {
-                player = FindObjectOfType<Player>().GetComponent<Player>(); 
+                player = FindObjectOfType<Player>().GetComponent<Player>();
             }
             return player;
-        }  
+        }
     }
+    
+    public StatusManager statusMgr;
+    public DataManager dataMgr;
+    public SceneController sceneController;
 
     public GameObject FindGameObject(string path)
     {
