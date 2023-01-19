@@ -22,6 +22,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     private ItemEffectDatabase theItemEffectDatabase;
 
 
+    private bool isAccessibleItem = true; // 아이템 접근가능 여부
+
     [SerializeField] private bool isQuickSlot;  // 해당 슬롯이 퀵슬롯인지 여부 판단
     [SerializeField] private int quickSlotIndex;  // 퀵슬롯 넘버
 
@@ -193,7 +195,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         }
     }
 
-    private void ChangeSlot()
+    public void ChangeSlot()
     {
         // a슬롯 드래그 한 슬롯 b 슬롯 드래그 당하는 슬롯
         // 바뀌어지는 슬롯 정보들 보관할 변수
@@ -211,7 +213,24 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             ItemShadow.instance.itemShadowSlot.ClearSlot();
         }
     }
+    public void SetItemAccessibleState(bool value)
+    {
+        // 중복 처리는 지양
+        if (isAccessibleItem == value) return;
 
+        if (value)
+        {
+            SetColor(1f);
+            go_CountImage.SetActive(false);
+        }
+        else
+        {
+            SetColor(0.3f);
+            go_CountImage.SetActive(false);
+        }
+
+        isAccessibleItem = value;
+    }
 
     public int GetQuickSlotIndex()
     {

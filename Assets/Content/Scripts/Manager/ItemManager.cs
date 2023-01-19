@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
+    public static ItemManager Instance;
+    void Start()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
     public List<Item> items = new List<Item>();
 
     void Awake()
