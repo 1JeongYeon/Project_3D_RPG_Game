@@ -160,10 +160,10 @@ public class InventoryUIManager : MonoBehaviour
             i++;
         }
 
-        /*foreach (var index in slots.Length)
+        foreach (var index in slots.Length)
         {
             UpdateSlots(index);
-        }*/
+        }
     }
     public void SortAllSlot()
     {

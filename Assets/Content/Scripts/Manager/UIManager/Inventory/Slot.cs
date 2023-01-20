@@ -91,14 +91,15 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         go_CountImage.SetActive(false);
     }
 
-    public void OnPointerClick(PointerEventData eventData) // ItemEffectDataBase에서 기능 일부 실행 성능 상승
+    // ItemEffectDataBase에서 기능 일부 실행
+    public void OnPointerClick(PointerEventData eventData) 
     {
         StatusManager sm = GameManager.Instance.statusMgr;
-        if (eventData.button == PointerEventData.InputButton.Right) // 오른쪽 마우스 누를때 사용
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             if (item != null)
             {
-                theItemEffectDatabase.UseItem(item); // database에서 아이템 사용 관련 모두 실행
+                theItemEffectDatabase.UseItem(item); 
 
                 if (item.itemType == Item.ItemType.Used)
                 {
@@ -145,7 +146,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         // 3가지 조건
         switch (result.gameObject.name)
         {
-            // 상점에 판매 할때
+            // 상점에 판매 할때 ( 상점 내에 드래그를 놓았을 때 result 값이 나오는 오브젝트 )
             case "Image : ItemSlot":
             case "Image : ShopFrame":
                 {
@@ -156,7 +157,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
                     }
                 }
                 break;
-            // 버릴때
+            // 버릴때 ( 버릴때 백그라운드 이미지가 result 값 )
             case "Image :: BG":
                 {
                     if (ItemShadow.instance.itemShadowSlot != null) 
@@ -165,7 +166,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
                     }
                 }
                 break;
-            // 취소 = 되돌리기
+            // 실행 취소될 때
             default:
                 {
                     ItemShadow.instance.SetColor(0);
@@ -175,7 +176,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         }
     }
 
-    public void OnDrop(PointerEventData eventData) // 해당 슬롯에 뭔가가 마우스 드롭 됐을 때 즉 나 자신에게 뭔가 드롭된게 있을 때 호출 
+    // 해당 슬롯에 뭔가가 마우스 드롭 됐을 때 즉 나 자신에게 뭔가 드롭된게 있을 때 호출 
+    public void OnDrop(PointerEventData eventData) 
     {
         if (ItemShadow.instance.itemShadowSlot != null)
         {
@@ -185,9 +187,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             {
                 theItemEffectDatabase.IsActivatedquickSlot(quickSlotIndex);
             }
-            else  // 인벤토리->인벤토리. 퀵슬롯->인벤토리
+            else  // 인벤토리->인벤토리 or 퀵슬롯->인벤토리
             {
-                if (ItemShadow.instance.itemShadowSlot.isQuickSlot)  // 퀵슬롯->인벤토리
+                if (ItemShadow.instance.itemShadowSlot.isQuickSlot) 
                 {
                     theItemEffectDatabase.IsActivatedquickSlot(ItemShadow.instance.itemShadowSlot.quickSlotIndex);
                 }
@@ -217,7 +219,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     {
         // 중복 처리는 지양
         if (isAccessibleItem == value) return;
-
+          
         if (value)
         {
             SetColor(1f);
