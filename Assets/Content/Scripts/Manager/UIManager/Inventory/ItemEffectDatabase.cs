@@ -5,10 +5,15 @@ using UnityEngine;
 [System.Serializable]
 public class ItemEffect // 한 아이템에 대한 효과를 위한 class
 {
-    public string itemName;  // 아이템의 이름  --> Key값
-    [Tooltip("HP, MP 만 구현")] // DP 는 포션으로 회복이 되면 안된다.
-    public string[] part;  // 효과. 어느 부분을 회복하거나 버프를 줄 포션인지. 포션 하나당 미치는 효과가 여러개일 수 있어 배열로 함.
-    public int[] num;  // 수치. 포션 하나당 미치는 효과가 여러개일 수 있어 배열로 함. 그에 따른 수치 정하기.
+    // 아이템의 이름  -> Key
+    public string itemName;
+
+    // DP 는 포션으로 회복이 되면 안된다.
+    [Tooltip("HP, MP 만 구현")]
+    // 효과. 어느 부분을 회복하거나 버프를 줄 포션인지. 포션 하나당 미치는 효과가 여러개일 수 있어 배열로 함.
+    public string[] part;
+    // 수치. 포션 하나당 미치는 효과가 여러개일 수 있어 배열로 함. 그에 따른 수치 정하기.
+    public int[] num;  
 }
 
 public class ItemEffectDatabase : MonoBehaviour
