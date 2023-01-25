@@ -127,15 +127,15 @@ public class InventoryUIManager : MonoBehaviour
 
     public void TrimAllSlot()
     {
-        // 가장 빠른 배열 빈공간 채우기 알고리즘
+        /* 가장 빠른 배열 빈공간 채우기 알고리즘
 
-        // i 커서와 j 커서
-        // i 커서 : 가장 앞에 있는 빈칸을 찾는 커서
-        // j 커서 : i 커서 위치에서부터 뒤로 이동하며 기존재 아이템을 찾는 커서
+         i 커서와 j 커서
+         i 커서 : 가장 앞에 있는 빈칸을 찾는 커서
+         j 커서 : i 커서 위치에서부터 뒤로 이동하며 기존재 아이템을 찾는 커서
 
-        // i커서가 빈칸을 찾으면 j 커서는 i+1 위치부터 탐색
-        // j커서가 아이템을 찾으면 아이템을 옮기고, i 커서는 i+1 위치로 이동
-        // j커서가 slots.Length에 도달하면 루프 즉시 종료
+         i커서가 빈칸을 찾으면 j 커서는 i+1 위치부터 탐색
+         j커서가 아이템을 찾으면 아이템을 옮기고, i 커서는 i+1 위치로 이동
+         j커서가 slots.Length에 도달하면 루프 즉시 종료*/
 
         indexSetUpdate.Clear();
 
@@ -160,10 +160,10 @@ public class InventoryUIManager : MonoBehaviour
             i++;
         }
 
-        foreach (var index in slots.Length)
+        /*foreach (var index in slots.Length)
         {
             UpdateSlots(index);
-        }
+        }*/
     }
     public void SortAllSlot()
     {
@@ -194,7 +194,7 @@ public class InventoryUIManager : MonoBehaviour
         _inventoryUI.UpdateAllSlotFilters(); // 필터 상태 업데이트*/
     }
     // ------------------------------------------------------------------------------------------------------------------------
-    public Toggle setupToggleCurrentSeletion
+    public Toggle setupToggleCurrentSelection
     {
         get { return inventoryToggleGroup.ActiveToggles().FirstOrDefault(); }
     }
@@ -203,15 +203,15 @@ public class InventoryUIManager : MonoBehaviour
     {
         if (inventoryToggleGroup.ActiveToggles().Any()) // Toggles 중 하나라도 Active된 Toggle이 있다면
         {
-            if (setupToggleCurrentSeletion.name.Equals("Toggle : Equipment"))
+            if (setupToggleCurrentSelection.name.Equals("Toggle : Equipment"))
             {
                 SelectionActive(true, false, false);
             }
-            else if (setupToggleCurrentSeletion.name.Equals("Toggle : Used"))
+            else if (setupToggleCurrentSelection.name.Equals("Toggle : Used"))
             {
                 SelectionActive(false, true, false);
             }
-            else if (setupToggleCurrentSeletion.name.Equals("Toggle : ETC"))
+            else if (setupToggleCurrentSelection.name.Equals("Toggle : ETC"))
             {
                 SelectionActive(false, false, true);
             }
@@ -227,7 +227,7 @@ public class InventoryUIManager : MonoBehaviour
                 {
                     if (slots[i].item.itemType != Item.ItemType.Equipment)
                     {
-                        Debug.Log("equip");
+                        Debug.Log("Equip");
                         slots[i].SetColor(0f);
                     }
                 }
