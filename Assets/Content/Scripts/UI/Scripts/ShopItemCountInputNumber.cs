@@ -30,14 +30,14 @@ public class ShopItemCountInputNumber : MonoBehaviour
     
     public void PriceSetting() // 유니티에서 호출
     {
-        if (string.IsNullOrEmpty(text_Input.text))
+        if (string.IsNullOrEmpty(text_Input.text)) // 문자열이 null이거나 공백일 때
         {
             text_ItemPrice.text = item.itemPrice.ToString();
             return;
         }
-        text_Input.text = text_Input.text.Replace(',', ' ');
-        text_Input.text = text_Input.text.Trim();
-        text_Input.text = int.Parse(text_Input.text).ToString();
+        text_Input.text = text_Input.text.Replace(',', ' '); // 치환
+        text_Input.text = text_Input.text.Trim(); // 공백제거
+        text_Input.text = int.Parse(text_Input.text).ToString(); // 변환
         text_ItemPrice.text = item.itemPrice.ToString();
 
         itemCount = int.Parse(text_Input.text);

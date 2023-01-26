@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class SellItemUI : MonoBehaviour//, IDropHandler
 {
     private bool activated;
-    // 아이템 팔때 쓰는 ui ===================================================================
+    // 아이템 팔때 쓰는 UI ===================================================================
     [SerializeField] private GameObject sellItemBase;
     [SerializeField] private GameObject sellPopup_main;
     [SerializeField] private GameObject sellPopup_sub;
@@ -84,14 +84,12 @@ public class SellItemUI : MonoBehaviour//, IDropHandler
                 if (num > ItemShadow.instance.itemShadowSlot.itemCount)
                 {
                     num = ItemShadow.instance.itemShadowSlot.itemCount;
-                    Debug.Log(num + ": OK 함수 num 1번");
                 }
             }
         }
         else
         {
             num = int.Parse(text_Preview.text);
-            Debug.Log(num + ": OK 함수 num 3번");
         }
         StartCoroutine(SellItemCorountine(num));
     }

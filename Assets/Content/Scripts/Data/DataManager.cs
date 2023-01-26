@@ -140,7 +140,8 @@ public class DataManager : MonoBehaviour
         // QuickSlot도 똑같이 받아와 업데이트 해준다.
         for (int i = 0; i < data.quickSlotItemName.Count; i++)
         {
-            theInventory.LoadToQuickSlot(data.quickSlotArrayNumber[i], data.quickSlotItemName[i], data.quickSlotItemNumber[i]);
+            theInventory.LoadToQuickSlot(data.quickSlotArrayNumber[i], 
+                data.quickSlotItemName[i], data.quickSlotItemNumber[i]);
         }
     }
     
