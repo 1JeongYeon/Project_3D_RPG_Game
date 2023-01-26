@@ -5,8 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class SellItemUI : MonoBehaviour//, IDropHandler
+public class SellItemUI : MonoBehaviour
 {
+    // 구조는 InputNumber 클래스와 비슷하게 만듬
     private bool activated;
     // 아이템 팔때 쓰는 UI ===================================================================
     [SerializeField] private GameObject sellItemBase;
@@ -43,8 +44,6 @@ public class SellItemUI : MonoBehaviour//, IDropHandler
     {
         if (ItemShadow.instance.itemShadowSlot != null)
         {
-            Debug.Log("sellUI call 함수");
-
             Slot iss = ItemShadow.instance.itemShadowSlot;
 
             sellItemBase.SetActive(true);
@@ -53,6 +52,7 @@ public class SellItemUI : MonoBehaviour//, IDropHandler
             if_text.text = "";
             sellItemImage.sprite = iss.item.itemImage;
             sellItemName.text = iss.item.itemName;
+            // 아이템의 가격을 70프로 가격정도로 판매한다.
             sellItemTotalPrice.text = (iss.item.itemPrice * 0.7f).ToString();
             text_Preview.text = iss.itemCount.ToString();
         }
@@ -74,7 +74,7 @@ public class SellItemUI : MonoBehaviour//, IDropHandler
         int num;
         if (string.IsNullOrEmpty(sellItemCountInput.text))
         {
-            // 숫자가 아닌걸 입력했을때임
+            // 숫자가 아닌걸 입력했을때
             num = 1;
 
             // 숫자가 있다면
