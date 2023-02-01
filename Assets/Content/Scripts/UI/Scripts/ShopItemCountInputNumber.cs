@@ -7,6 +7,9 @@ using TMPro;
 
 public class ShopItemCountInputNumber : MonoBehaviour
 {
+    // 아이템 구매시 필요한 UI Script
+
+
     // 유저가 입력한 수
     [SerializeField] private TMP_InputField text_Input;
     //  템 갯수 표시
@@ -15,20 +18,33 @@ public class ShopItemCountInputNumber : MonoBehaviour
     [SerializeField] private TMP_Text text_ItemPrice;
     // 활성화 시 전 텍스트 지우고 초기화 해야함 text 말고 inputfield 형식으로 불러와서 덮어씌임 방지
     [SerializeField] private TMP_InputField if_text;
-    // inputfield ui오브젝트가 할당 됨, 입력필드 활성화 비활을 위해 겜오브젝트 형식
-    [SerializeField] private Image go_Base;
+    // inputfield ui오브젝트가 할당 됨
+    [SerializeField] private GameObject go_Base;
     
     private Item item;
     private int itemCount;
-    // 여러 UI에서 쓰일것으로 전역변수
+   
     public int itemTotalPrice;
+
+    private void Update()
+    {
+        // 끄는건 유니티 내에서 게임오브젝트 SetActive = false가 되게 하였다.
+        if (go_Base)
+        {
+            if (Input.GetKey(KeyCode.Return))
+            {
+                OnBuy();
+                go_Base.SetActive(false);
+            }
+        }
+    }
 
     public void OnSetData(Item argItem)
     {
         item = argItem;
     }
     
-    public void PriceSetting() // 유니티에서 호출
+    public void PriceSetting() // 유니티에서 호출 On Value Changed
     {
         if (string.IsNullOrEmpty(text_Input.text)) // 문자열이 null이거나 공백일 때
         {
@@ -44,7 +60,7 @@ public class ShopItemCountInputNumber : MonoBehaviour
 
         if (item.itemType != Item.ItemType.Equipment)
         {
-            if (itemCount > 100)
+            if (itemCount >= 100)
             {
                 text_Input.text = 99.ToString();
                 itemCount = 99;

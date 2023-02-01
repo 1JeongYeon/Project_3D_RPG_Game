@@ -8,7 +8,9 @@ using UnityEngine.EventSystems;
 public class SellItemUI : MonoBehaviour
 {
     // 구조는 InputNumber 클래스와 비슷하게 만듬
-    private bool activated;
+    private bool isActivated = false;
+
+    private int sellprice = 0;
     // 아이템 팔때 쓰는 UI ===================================================================
     [SerializeField] private GameObject sellItemBase;
     [SerializeField] private GameObject sellPopup_main;
@@ -26,11 +28,12 @@ public class SellItemUI : MonoBehaviour
     private void Start()
     {
         OKbtn.onClick.AddListener(OK);
+        
     }
 
     private void Update()
     {
-        if (activated)
+        if (isActivated)
         {
             if (Input.GetKeyDown(KeyCode.Return)) 
                 OK();
@@ -48,7 +51,7 @@ public class SellItemUI : MonoBehaviour
 
             sellItemBase.SetActive(true);
             SellPopupSub();
-            activated = true;
+            isActivated = true;
             if_text.text = "";
             sellItemImage.sprite = iss.item.itemImage;
             sellItemName.text = iss.item.itemName;
@@ -60,7 +63,7 @@ public class SellItemUI : MonoBehaviour
 
     public void Cancel()
     {
-        activated = false;
+        isActivated = false;
         ItemShadow.instance.SetColor(0);
         sellItemBase.SetActive(false);
         SellPopupMain();
@@ -75,8 +78,8 @@ public class SellItemUI : MonoBehaviour
         if (string.IsNullOrEmpty(sellItemCountInput.text))
         {
             // 숫자가 아닌걸 입력했을때
-            num = 1;
-
+            num = ItemShadow.instance.itemShadowSlot.itemCount;
+            sellItemCountInput.text = ItemShadow.instance.itemShadowSlot.itemCount.ToString();
             // 숫자가 있다면
             if (CheckNumber(sellItemCountInput.text))
             {
@@ -89,15 +92,16 @@ public class SellItemUI : MonoBehaviour
         }
         else
         {
-            num = int.Parse(text_Preview.text);
+            num = int.Parse(sellItemCountInput.text);
         }
         StartCoroutine(SellItemCorountine(num));
+        sellItemTotalPrice.text = (num * (sellprice + 1)).ToString();
     }
 
     IEnumerator SellItemCorountine(int _num)
     {
         // 인벤토리에 추가함 내가 파는 아이템의 70프로 가격만
-        int sellprice = (int)(ItemShadow.instance.itemShadowSlot.item.itemPrice * 0.7f);
+        sellprice = (int)(ItemShadow.instance.itemShadowSlot.item.itemPrice * 0.7f);
         // 입력한 _num갯수만큼 for문
         for (int i = 0; i < _num; i++)
         {
@@ -111,10 +115,10 @@ public class SellItemUI : MonoBehaviour
                 yield return new WaitForSeconds(0.05f);
             }
         }
-        sellItemTotalPrice.text = ((_num * sellprice) + 1).ToString();
+       // sellItemTotalPrice.text = ((_num * sellprice) + 1).ToString();
         ItemShadow.instance.itemShadowSlot = null;
         sellItemBase.SetActive(false);
-        activated = false;
+        isActivated = false;
     }
 
     private bool CheckNumber(string _argString)
