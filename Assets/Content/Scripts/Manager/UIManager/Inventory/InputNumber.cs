@@ -85,7 +85,7 @@ public class InputNumber : MonoBehaviour
         {
             if (ItemShadow.instance.itemShadowSlot.item.itemPrefab != null) // 아이템 팔때 inputnumber base 안끄고 팔면 여기서 null (당연함)
             {
-                Transform trans = GameObject.Find("Player").transform; // 자기 자신을 찾고
+                Transform trans = GameObject.Find("Player(Clone)").transform; // 자기 자신을 찾고
                 Instantiate(ItemShadow.instance.itemShadowSlot.item.itemPrefab,
                 trans.position + trans.forward,
                 Quaternion.identity); // 아이템 프리팹 생성 플레이어 좀 앞에다가
